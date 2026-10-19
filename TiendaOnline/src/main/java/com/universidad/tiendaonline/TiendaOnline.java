@@ -1,16 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.universidad.tiendaonline;
 
+import com.universidad.tiendaonline.datos.UsuarioRepositorio;
+import com.universidad.tiendaonline.presentacion.Login;
+import com.universidad.tiendaonline.servicios.UsuarioServicio;
+
 /**
- *
- * @author omard
+ * Clase principal: arma las capas y abre la ventana de ingreso.
  */
 public class TiendaOnline {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        UsuarioServicio servicio = new UsuarioServicio(new UsuarioRepositorio());
+        java.awt.EventQueue.invokeLater(() -> new Login(servicio).setVisible(true));
     }
 }
