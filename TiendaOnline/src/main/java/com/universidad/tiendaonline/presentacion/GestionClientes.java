@@ -23,6 +23,7 @@ public class GestionClientes extends JFrame {
     private final JButton btnConsultar = new JButton("Consultar");
     private final JButton btnModificar = new JButton("Modificar");
     private final JButton btnEliminar = new JButton("Eliminar");
+    private final JButton btnRegistrar = new JButton("Registrar");
     private final DefaultTableModel modelo = new DefaultTableModel(
             new String[]{"ID", "Nombre", "Teléfono", "Correo"}, 0);
     private final JTable tabla = new JTable(modelo);
@@ -42,10 +43,11 @@ public class GestionClientes extends JFrame {
         form.add(new JLabel("Tel:")); form.add(txtTelefono);
         form.add(new JLabel("Correo:")); form.add(txtCorreo);
         JPanel botones = new JPanel();
-        botones.add(btnConsultar); botones.add(btnModificar); botones.add(btnEliminar);
+        botones.add(btnRegistrar); botones.add(btnConsultar); botones.add(btnModificar); botones.add(btnEliminar);
         add(form, java.awt.BorderLayout.NORTH);
         add(new JScrollPane(tabla), java.awt.BorderLayout.CENTER);
         add(botones, java.awt.BorderLayout.SOUTH);
+        btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
         btnConsultar.addActionListener(this::btnConsultarActionPerformed);
         btnModificar.addActionListener(this::btnModificarActionPerformed);
         btnEliminar.addActionListener(this::btnEliminarActionPerformed);
@@ -53,6 +55,10 @@ public class GestionClientes extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {
+        new RegistroCliente(this, servicio, this::refrescarTabla).setVisible(true);
+    }
+    
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {
         Cliente c = servicio.consultarCliente(txtId.getText().trim());
         if (c == null) {
